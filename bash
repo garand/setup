@@ -20,6 +20,7 @@ function init() {
   mv base-master/.gitignore ./
   rm -R base-master
   sed -i "" "s/\"name\": \"base\"/\"name\": \"$project\"/g" package.json
+  mkdir assets/img
   git init
   git add .
   git commit -m "Initial commit"
