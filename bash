@@ -12,20 +12,36 @@ function init() {
     read project
   fi
   cd ~/Projects
+  echo ""
+  echo "Downloading Base"
+  echo "------------------------"
   curl -L https://github.com/garand/base/archive/master.zip > "$project".zip
   unzip "$project".zip -d "$project"
   rm "$project".zip
   cd "$project"
+  echo ""
+  echo "------------------------"
+  echo "Configuring Project"
+  echo "------------------------"
   mv base-master/* ./
   mv base-master/.gitignore ./
   rm -R base-master
   sed -i "" "s/\"name\": \"base\"/\"name\": \"$project\"/g" package.json
   mkdir assets/img
+  echo ""
+  echo "Initializing Git"
+  echo "------------------------"
   git init
   git add .
   git commit -m "Initial commit"
+  echo ""
+  echo "Downloading Node Modules"
+  echo -ne "------------------------"
   npm install
   editor . index.html assets/scss/main.scss assets/js/main.js && editor --command next_view
+  echo ""
+  echo "Launching Gulp"
+  echo "------------------------"
   gulp
 }
 
