@@ -3,7 +3,7 @@ alias gs='git status -sb'
 alias dot="editor -n ~/.defaults ~/.defaults/bash"
 alias hosts="editor -n /etc/hosts /etc/apache2/extra/httpd-vhosts.conf && editor --command next_view"
 alias ls="ls -la"
-alias init="bash <(curl -Ls http://base.garand.cc)"
+alias init="bash <(curl -Ls base.garand.cc)"
 
 function p() {
   project=${1:-}
