@@ -12,8 +12,25 @@ function p() {
 
 function e() {
   project=${1:-}
-  cd ~/Projects/"$project"
-  editor .
+
+  if [ ! -f *.sublime-project ]; then
+
+    if [ -z "$project" ]; then
+      echo -ne "Project Name: "
+      read project
+    fi
+
+    cd ~/Projects/"$project";
+
+    if [ ! -f *.sublime-project ]; then
+      editor .
+    else
+      editor -p *.sublime-project
+    fi
+
+  else
+    editor -p *.sublime-project
+  fi
 }
 
 function server() {
