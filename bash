@@ -4,6 +4,7 @@ alias dot="editor -n ~/.defaults ~/.defaults/bash"
 alias hosts="editor -n /etc/hosts /etc/apache2/extra/httpd-vhosts.conf && editor --command next_view"
 alias ls="ls -la"
 alias init="bash <(curl -Ls base.garand.cc)"
+alias wpinit="bash <(curl -s https://raw.githubusercontent.com/garand/wpinit/master/wpinit)"
 
 function p() {
   project=${1:-}
