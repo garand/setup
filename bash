@@ -7,6 +7,41 @@ alias init="bash <(curl -Ls base.garand.cc)"
 alias wpinit="bash <(curl -s https://raw.githubusercontent.com/garand/wpinit/master/wpinit)"
 alias git=hub
 
+function wpstart() {
+  project_dir=${PWD}
+  project=${PWD##*/}
+
+  # Move and link composer.json, if not done already
+  if [ ! -f composer.json ]; then
+    mv ~/.wordpress/"$project"/composer.json "$project_dir"/
+    ln -s "$project_dir"/composer.json ~/.wordpress/"$project"/
+  fi
+
+  # Update Git repository, if clean
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    local status=$(git status --porcelain 2> /dev/null)
+    if [[ "$status" == "" ]]; then
+      git pull
+    fi
+  fi
+
+  cd ~/.wordpress/"$project"
+  composer update
+  cd "$project_dir"
+
+  if [ -f package.json ]; then
+    npm install
+    if [ -f Gruntfile.js ]; then
+      grunt &
+    fi
+  else
+    compass watch &
+  fi
+
+  cd ~/.wordpress/"$project"
+  server 4103
+}
+
 function p() {
   project=${1:-}
   cd ~/Projects/"$project"
@@ -37,7 +72,10 @@ function e() {
 
 function server() {
   port=${1:-8000}
-  open http://localhost:"$port" && php -S 0.0.0.0:"$port";
+
+  php -S 0.0.0.0:"$port" &
+  sleep 1
+  open http://localhost:"$port"
 }
 
 function deploy() {
