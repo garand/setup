@@ -6,6 +6,7 @@ alias ls="ls -la"
 alias init="bash <(curl -Ls base.garand.cc)"
 alias wpinit="bash <(curl -s https://raw.githubusercontent.com/garand/wpinit/master/wpinit)"
 alias git=hub
+alias master="git checkout master"
 
 function wpstart() {
   project_dir=${PWD}
@@ -33,6 +34,8 @@ function wpstart() {
     npm install
     if [ -f Gruntfile.js ]; then
       grunt &
+    elif [ -f gulpfile.js ]; then
+      gulp &
     fi
   else
     compass watch &
