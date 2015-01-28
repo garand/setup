@@ -7,6 +7,7 @@ alias init="bash <(curl -Ls base.garand.cc)"
 alias wpinit="bash <(curl -s https://raw.githubusercontent.com/garand/wpinit/master/wpinit)"
 alias git=hub
 alias master="git checkout master"
+alias up="vagrant up"
 
 function wpstart() {
   project_dir=${PWD}
