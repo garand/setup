@@ -5,7 +5,7 @@ alias hosts="editor -n /etc/hosts /etc/apache2/extra/httpd-vhosts.conf && editor
 alias ls="ls -la"
 alias init="bash <(curl -Ls base.garand.cc)"
 alias wpinit="bash <(curl -s https://raw.githubusercontent.com/garand/wpinit/master/wpinit)"
-# alias git=hub
+alias git=hub
 alias master="git checkout master"
 
 function wpstart() {
