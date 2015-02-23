@@ -77,9 +77,7 @@ function e() {
 function server() {
   port=${1:-8000}
 
-  php -S 0.0.0.0:"$port" &
-  sleep 1
-  open http://localhost:"$port"
+  open http://localhost:"$port" && php -S 0.0.0.0:"$port"
 }
 
 function deploy() {
