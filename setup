@@ -1,2 +1,3 @@
 git config --global user.name "Anthony Garand"
 git config --global user.email anthonygarand@gmail.com
+git config --global push.default simple
