@@ -1,3 +1,93 @@
+# Install Homebrew
+if test ! $(which brew); then
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Install Git
+brew install git
+
+# Install Hub
+brew install hub
+
+# Download Defaults
+git clone git@github.com:garand/defaults.git ~/.defaults
+
+# Configure OS X
+cd ~/.defaults
+chmod +x osx
+./osx
+
+# Configure Defaults
+echo "[[ -r ~/.defaults/bash ]] && . ~/.defaults/bash" >> ~/.bashrc
+echo "[[ -r ~/.defaults/bash ]] && . ~/.defaults/bash" >> ~/.bash_profile
+
+# Configure Git
 git config --global user.name "Anthony Garand"
 git config --global user.email anthonygarand@gmail.com
 git config --global push.default simple
+git config --global core.excludesfile '~/.defaults/.gitignore'
+git config --global core.editor "subl -n -w"
+
+# Create Projects Directory
+mkdir ~/Projects
+
+# Create temporary setup directory
+mkdir ~/.setup
+
+# Install Source Code Pro Font
+cd ~/.setup
+curl -LOk https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
+unzip 1.017R.zip
+cd source-code-pro-1.017R/OTF
+mv * /Library/Fonts/
+
+# Install Alfred
+cd ~/.setup
+curl -LOk https://cachefly.alfredapp.com/Alfred_2.6_374.zip
+unzip Alfred_2.6_374.zip
+mv Alfred\ 2.app/ /Applications/Alfred.app
+
+# Link Alfred Settings
+rm -rf ~/Library/Application\ Support/Alfred\ 2/Alfred.alfredpreferences/
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Applications/Alfred/Alfred.alfredpreferences/ ~/Library/Application\ Support/Alfred\ 2/
+
+# Install Sublime Text
+cd ~/.setup
+curl -LOk http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203071.dmg
+open Sublime%20Text%20Build%203071.dmg
+cd /Volumes/Sublime\ Text/
+cp -r Sublime\ Text.app/ /Applications/Sublime\ Text.app
+hdiutil detach /Volumes/Sublime\ Text/
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+
+# Install Sublime Text Package Control
+cd ~/.setup
+curl -LOk https://sublime.wbond.net/Package%20Control.sublime-package
+mv Package%20Control.sublime-package ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+
+# Link Sublime Text Settings
+rm -rf ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/*
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Applications/Sublime\ Text/Package\ Control.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Package\ Control.sublime-settings
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Applications/Sublime\ Text/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Applications/Sublime\ Text/SublimeGit.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/SublimeGit.sublime-settings
+
+# Install Bartender
+cd ~/.setup
+curl -LOk http://www.macbartender.com/Demo/Bartender.zip
+unzip Bartender.zip
+mv Bartender.app/ /Applications/
+
+# Install Sequel Pro
+cd ~/.setup
+curl -LOk https://sequel-pro.googlecode.com/files/sequel-pro-1.0.2.dmg
+open sequel-pro-1.0.2.dmg
+cd /Volumes/Sequel\ Pro\ 1.0.2/
+cp -r Sequel\ Pro.app/ /Applications/Sequel\ Pro.app/
+hdiutil detach /Volumes/Sequel\ Pro\ 1.0.2/
+
+# Link Sequel Pro Settings
+rm -rf ~/Library/Application\ Support/Sequel\ Pro/Data/*
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Applications/Sequel\ Pro/Favorites.plist ~/Library/Application\ Support/Sequel\ Pro/Data/Favorites.plist
+
+# Clean up temporary files
+rm -rf ~/.setup
