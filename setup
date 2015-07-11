@@ -8,15 +8,17 @@ brew doctor
 brew update
 brew upgrade --all
 
+# Install Ruby
+brew install ruby
+
 # Install Git
 brew install git
 
 # Install Hub
 brew install hub
 
-# Install Node & NPM
-brew install node --without-npm
-curl -L https://www.npmjs.com/install.sh | sh
+# Install Node
+brew install node
 
 # Install MySQL
 brew install mysql
@@ -30,16 +32,13 @@ curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
 # Download Setup
-git clone git@github.com:garand/setup.git ~/.dotfiles
-cd ~/.dotfiles
-git pull
+git clone git@github.com:garand/setup.git ~/Projects/garand/setup
 
-ln -s ~/.dotfiles/bash/bash ~/.bashrc
-ln -s ~/.dotfiles/bash/bash ~/.bash_profile
-ln -s ~/.dotfiles/node/npmrc ~/.npmrc
+ln -s ~/Projects/garand/setup/bash/bash ~/.bashrc
+ln -s ~/Projects/garand/setup/bash/bash ~/.bash_profile
 
 # Configure OS X
-cd ~/.dotfiles/osx
+cd ~/Projects/garand/setup/osx
 chmod +x osx
 ./osx
 
@@ -50,7 +49,7 @@ defaults write com.apple.dock persistent-apps -array
 git config --global user.name "Anthony Garand"
 git config --global user.email garand@garand.me
 git config --global push.default simple
-git config --global core.excludesfile '~/.dotfiles/git/ignore'
+git config --global core.excludesfile '~/Projects/garand/setup/git/ignore'
 git config --global core.editor "subl -n -w"
 
 # Create Projects Directory
