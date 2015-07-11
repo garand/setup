@@ -1,6 +1,1 @@
-```
-cd ~
-git clone git@github.com:garand/defaults.git .defaults
-echo "[[ -r ~/.defaults/bash ]] && . ~/.defaults/bash" >> ~/.bashrc
-echo "[[ -r ~/.defaults/bash ]] && . ~/.defaults/bash" >> ~/.bash_profile
-```
+This is my personal setup file for configuring new computers. Use at your own risk.
