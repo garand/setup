@@ -4,8 +4,10 @@ alias git=hub
 alias e=subl
 
 function git_branch () {
-  if [ -d .git ]; then
-    branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
+
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+  if [ $branch ]; then
 
     if [[ -z $(git status -s) ]]; then
       color='\033[00;34m'
@@ -16,6 +18,7 @@ function git_branch () {
     echo -e "${color}\c"
     printf '[%s] ' $branch
   fi
+
 }
 
 export PS1='\[\e[1;32m\]\W $(git_branch)\[\e[1;37m\]$ '
