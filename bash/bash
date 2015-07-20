@@ -3,6 +3,12 @@ alias gs='git status -sb'
 alias git=hub
 alias e=subl
 
+function server() {
+  random_port=$((((RANDOM + RANDOM) % 63001) + 2000))
+  port=${1:-$random_port}
+  open http://forge.local:"$port" && php -S 0.0.0.0:"$port";
+}
+
 function git_branch () {
 
   branch=$(git symbolic-ref --short HEAD 2>/dev/null)
@@ -20,5 +26,9 @@ function git_branch () {
   fi
 
 }
+
+if [ -f ~/Projects/garand/setup/bash/git/git-completion.bash ]; then
+  . ~/Projects/garand/setup/bash/git/git-completion.bash
+fi
 
 export PS1='\[\e[1;33m\]\W $(git_branch)\[\e[1;37m\]$ '
