@@ -3,6 +3,7 @@ alias gs='git status -sb'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias git=hub
 alias e=subl
+alias master='git checkout master'
 
 function server() {
   random_port=$((((RANDOM + RANDOM) % 63001) + 2000))
