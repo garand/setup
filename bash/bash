@@ -8,7 +8,7 @@ alias master='git checkout master'
 function server() {
   random_port=$((((RANDOM + RANDOM) % 63001) + 2000))
   port=${1:-$random_port}
-  open http://forge.local:"$port" && php -S 0.0.0.0:"$port";
+  open http://0.0.0.0:"$port" && php -S 0.0.0.0:"$port";
 }
 
 function git_branch () {
