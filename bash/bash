@@ -18,9 +18,9 @@ function git_branch () {
   if [ $branch ]; then
 
     if [[ -z $(git status -s) ]]; then
-      color='\033[00;32m'
+      color=''
     else
-      color='\033[01;31m'
+      color=''
     fi
 
     echo -e "${color}\c"
@@ -33,4 +33,4 @@ if [ -f ~/Projects/garand/setup/bash/git/git-completion.bash ]; then
   . ~/Projects/garand/setup/bash/git/git-completion.bash
 fi
 
-export PS1='\[\e[1;33m\]\W $(git_branch)\[\e[1;37m\]$ '
+export PS1='\W $(git_branch)$ '
